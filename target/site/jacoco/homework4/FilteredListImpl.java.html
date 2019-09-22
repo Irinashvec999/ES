@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>FilteredListImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">homework-epam</a> &gt; <a href="index.source.html" class="el_package">homework4</a> &gt; <span class="el_source">FilteredListImpl.java</span></div><h1>FilteredListImpl.java</h1><pre class="source lang-java linenums">package homework4;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+
+<span class="fc" id="L7">public class FilteredListImpl implements FilteredList{</span>
+<span class="fc" id="L8">    private List&lt;Student&gt; list = new ArrayList&lt;&gt;();</span>
+
+    public List&lt;Student&gt; getList() {
+<span class="fc" id="L11">        return list;</span>
+    }
+
+    public void setList(Student... students) {
+<span class="fc bfc" id="L15" title="All 2 branches covered.">        for (Student student : students) {</span>
+<span class="fc" id="L16">            list.add(student);</span>
+        }
+<span class="fc" id="L18">    }</span>
+
+    public List&lt;Student&gt; filterByFaculty(Faculty faculty) {
+<span class="fc" id="L21">        List&lt;Student&gt; filteredList = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L22" title="All 2 branches covered.">        for (Student st : list) {</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">            if (st.getUniversityData().getFaculty() == faculty) {</span>
+<span class="fc" id="L24">                filteredList.add(st);</span>
+            }
+<span class="fc" id="L26">        }</span>
+<span class="fc" id="L27">        return filteredList;</span>
+    }
+
+    public void filterByFacultyAndCourse() {
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        for (Faculty f : Faculty.values()) {</span>
+<span class="fc" id="L32">            List&lt;Student&gt; filterByFaculty = filterByFaculty(f);</span>
+<span class="pc" id="L33">            filterByFaculty.sort(Comparator.comparing(student -&gt; student.getUniversityData().getCourse().getNumber()));</span>
+
+<span class="fc" id="L35">            System.out.println(&quot;\nStudents of &quot; + f + &quot; faculty, sorted by courses: &quot;);</span>
+<span class="fc" id="L36">            showFilteredList(filterByFaculty);</span>
+        }
+<span class="fc" id="L38">    }</span>
+
+    public void showFilteredList(List&lt;Student&gt; filteredList) {
+<span class="fc bfc" id="L41" title="All 2 branches covered.">        for (int i = 0; i &lt; filteredList.size(); i++) {</span>
+<span class="fc" id="L42">            System.out.println(filteredList.get(i).toString());</span>
+        }
+<span class="fc" id="L44">    }</span>
+
+    public void whoWasBornAfterYear(int year) {
+<span class="fc" id="L47">        List&lt;Student&gt; sorted = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">        for (Student st : list) {</span>
+<span class="pc bpc" id="L49" title="1 of 2 branches missed.">            if (st.getbDate().getYear() &gt; year) {</span>
+<span class="fc" id="L50">                sorted.add(st);</span>
+            }
+<span class="fc" id="L52">        }</span>
+<span class="fc" id="L53">        System.out.println(&quot;\nThey were born after &quot; + year + &quot;:&quot;);</span>
+<span class="fc" id="L54">        showFilteredList(sorted);</span>
+<span class="fc" id="L55">    }</span>
+
+    public void showGroupList(Faculty f, Course course) {
+<span class="fc" id="L58">        List&lt;Student&gt; sorted = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        for (Student st : filterByFaculty(f)) {</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">            if (st.getUniversityData().getCourse().getNumber() == course.getNumber()) {</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">                if (st.getUniversityData().getCourse().getGroup() == course.getGroup()) {</span>
+<span class="nc" id="L62">                    sorted.add(st);</span>
+                }
+            }
+<span class="fc" id="L65">        }</span>
+<span class="fc" id="L66">        System.out.println(&quot;\nThere are students of &quot; +</span>
+                f + &quot; faculty, &quot; +
+<span class="fc" id="L68">                 &quot; group № &quot; + course.getGroup() +</span>
+<span class="fc" id="L69">                 &quot; course № &quot;  + course.getNumber() + &quot;:&quot;);</span>
+<span class="fc" id="L70">        showFilteredList(sorted);</span>
+
+<span class="fc" id="L72">    }</span>
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.eclemma.org/jacoco">JaCoCo</a> 0.7.7.201606060606</span></div></body></html>
