@@ -1,0 +1,5 @@
+ua/kiev/appliances/service/impl/OrderServiceImplTest.class
+ua/kiev/appliances/repository/DBtest.class
+ua/kiev/appliances/service/impl/AdminServiceImplTest.class
+ua/kiev/appliances/service/impl/CustomerServiceImplTest.class
+ua/kiev/appliances/service/PasswordEncoderImplTest.class
